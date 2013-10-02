@@ -26,7 +26,7 @@ namespace Checkpoints
         boost::assign::map_list_of
         ( 0, hashGenesisBlockOfficial )
         ( 48123, uint256("0x00000001bc20a5faa99495ba3c3c236e3e061e30251e09cd96285385de3f917e"))
-        ( 64000, uint256("0x0000000cbe91ce09d00ddf4fd2e49c5e905be1143422e6716839f54924b353f9"))
+        ( 81485, uint256("0x0000003730c7e6c4af19e566bdb674daaf571d12e2a41e83b52dfb8e77153bb2"))
         ;
 
     static MapCheckpoints mapCheckpointsTestnet =
@@ -435,4 +435,3 @@ bool CSyncCheckpoint::ProcessSyncCheckpoint(CNode* pfrom)
     printf("ProcessSyncCheckpoint: sync-checkpoint at %s\n", hashCheckpoint.ToString().c_str());
     return true;
 }
-
