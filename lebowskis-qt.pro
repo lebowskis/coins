@@ -397,7 +397,6 @@ macx:LIBS += -framework Foundation -framework ApplicationServices -framework App
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/qt/res/icons/Lebowskis.icns
 macx:TARGET = "Lebowskis-Qt"
-macx:QMAKE_INFO_PLIST = share/qt/Info.plist
 
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
 INCLUDEPATH += $$BOOST_INCLUDE_PATH $$BDB_INCLUDE_PATH $$OPENSSL_INCLUDE_PATH $$QRENCODE_INCLUDE_PATH
