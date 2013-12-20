@@ -28,9 +28,9 @@ AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent) :
     ui->setupUi(this);
 
 #ifdef Q_OS_MAC // Icons on push buttons are very uncommon on Mac
-    ui->newAddressButton->setIcon(QIcon());
-    ui->copyToClipboard->setIcon(QIcon());
-    ui->deleteButton->setIcon(QIcon());
+    ui->newAddress->setIcon(QIcon());
+    ui->copyAddress->setIcon(QIcon());
+    ui->deleteAddress->setIcon(QIcon());
 #endif
 
 #ifndef USE_QRCODE
@@ -53,25 +53,25 @@ AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent) :
     case SendingTab:
         ui->labelExplanation->setText(tr("These are your Lebowskis addresses for sending payments. Always check the amount and the receiving address before sending coins."));
         ui->labelExplanation->setVisible(false);
-        ui->deleteButton->setVisible(true);
+        ui->deleteAddress->setVisible(true);
         ui->signMessage->setVisible(false);
         break;
     case ReceivingTab:
         ui->labelExplanation->setText(tr("These are your Lebowskis addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you."));
-        ui->deleteButton->setVisible(false);
+        ui->deleteAddress->setVisible(false);
         ui->signMessage->setVisible(true);
         break;
     }
 
     // Context menu actions
-    QAction *copyAddressAction = new QAction(ui->copyToClipboard->text(), this);
+    QAction *copyAddressAction = new QAction(ui->copyAddress->text(), this);
     QAction *copyLabelAction = new QAction(tr("Copy &Label"), this);
     QAction *editAction = new QAction(tr("&Edit"), this);
     QAction *sendCoinsAction = new QAction(tr("Send &Coins"), this);
     QAction *showQRCodeAction = new QAction(ui->showQRCode->text(), this);
     QAction *signMessageAction = new QAction(ui->signMessage->text(), this);
     QAction *verifyMessageAction = new QAction(ui->verifyMessage->text(), this);
-    deleteAction = new QAction(ui->deleteButton->text(), this);
+    deleteAddress = new QAction(ui->deleteAddress->text(), this);
 
     // Build context menu
     contextMenu = new QMenu();
@@ -79,7 +79,7 @@ AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent) :
     contextMenu->addAction(copyLabelAction);
     contextMenu->addAction(editAction);
     if(tab == SendingTab)
-        contextMenu->addAction(deleteAction);
+        contextMenu->addAction(deleteAddress);
     contextMenu->addSeparator();
     if(tab == SendingTab)
         contextMenu->addAction(sendCoinsAction);
@@ -95,7 +95,7 @@ AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent) :
     connect(copyAddressAction, SIGNAL(triggered()), this, SLOT(on_copyAddress_clicked()));
     connect(copyLabelAction, SIGNAL(triggered()), this, SLOT(onCopyLabelAction()));
     connect(editAction, SIGNAL(triggered()), this, SLOT(onEditAction()));
-    connect(deleteAction, SIGNAL(triggered()), this, SLOT(on_deleteAddress_clicked()));
+    connect(deleteAddress, SIGNAL(triggered()), this, SLOT(on_deleteAddress_clicked()));
     connect(sendCoinsAction, SIGNAL(triggered()), this, SLOT(onSendCoinsAction()));
     connect(showQRCodeAction, SIGNAL(triggered()), this, SLOT(on_showQRCode_clicked()));
     connect(signMessageAction, SIGNAL(triggered()), this, SLOT(on_signMessage_clicked()));
@@ -294,9 +294,9 @@ void AddressBookPage::selectionChanged()
         {
         case SendingTab:
             // In sending tab, allow deletion of selection
-            ui->deleteButton->setEnabled(true);
-            ui->deleteButton->setVisible(true);
-            deleteAction->setEnabled(true);
+            ui->deleteAddress->setEnabled(true);
+            ui->deleteAddress->setVisible(true);
+            deleteAddress->setEnabled(true);
             ui->signMessage->setEnabled(false);
             ui->signMessage->setVisible(false);
             ui->verifyMessage->setEnabled(true);
@@ -304,23 +304,23 @@ void AddressBookPage::selectionChanged()
             break;
         case ReceivingTab:
             // Deleting receiving addresses, however, is not allowed
-            ui->deleteButton->setEnabled(false);
-            ui->deleteButton->setVisible(false);
-            deleteAction->setEnabled(false);
+            ui->deleteAddress->setEnabled(false);
+            ui->deleteAddress->setVisible(false);
+            deleteAddress->setEnabled(false);
             ui->signMessage->setEnabled(true);
             ui->signMessage->setVisible(true);
             ui->verifyMessage->setEnabled(false);
             ui->verifyMessage->setVisible(false);
             break;
         }
-        ui->copyToClipboard->setEnabled(true);
+        ui->copyAddress->setEnabled(true);
         ui->showQRCode->setEnabled(true);
     }
     else
     {
-        ui->deleteButton->setEnabled(false);
+        ui->deleteAddress->setEnabled(false);
         ui->showQRCode->setEnabled(false);
-        ui->copyToClipboard->setEnabled(false);
+        ui->copyAddress->setEnabled(false);
         ui->signMessage->setEnabled(false);
         ui->verifyMessage->setEnabled(false);
     }

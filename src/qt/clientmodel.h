@@ -60,7 +60,7 @@ signals:
     void numBlocksChanged(int count, int countOfPeers);
 
     //! Asynchronous error notification
-    void message(const QString &title, const QString &message, unsigned int style, bool modal);
+    void message(const QString &title, const QString &message, unsigned int style, bool *ret);
 
 public slots:
     void updateTimer();

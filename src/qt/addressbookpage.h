@@ -54,7 +54,7 @@ private:
     QString returnValue;
     QSortFilterProxyModel *proxyModel;
     QMenu *contextMenu;
-    QAction *deleteAction;
+    QAction *deleteAddress;
     QString newAddressToSelect;
 
 private slots:

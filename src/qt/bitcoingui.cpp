@@ -57,7 +57,7 @@
 #if QT_VERSION < 0x050000
 #include <QUrl>
 #include <QDesktopServices>
-#elsif
+#else
 #include <QStandardPaths>
 #endif
 #include <QMimeData>
@@ -377,7 +377,7 @@ void BitcoinGUI::setClientModel(ClientModel *clientModel)
         connect(clientModel, SIGNAL(numBlocksChanged(int,int)), this, SLOT(setNumBlocks(int,int)));
 
         // Receive and report messages from network/worker thread
-        connect(clientModel, SIGNAL(message(QString,QString,unsigned int)), this, SLOT(message(QString,QString,unsigned int)));
+        connect(clientModel, SIGNAL(message(QString,QString,uint,bool*)), this, SLOT(message(QString,QString,uint,bool*)));
 
         rpcConsole->setClientModel(clientModel);
         addressBookPage->setOptionsModel(clientModel->getOptionsModel());
@@ -391,7 +391,7 @@ void BitcoinGUI::setWalletModel(WalletModel *walletModel)
     if(walletModel)
     {
         // Report errors from wallet thread
-        connect(walletModel, SIGNAL(message(QString,QString,unsigned int,bool)), this, SLOT(message(QString,QString,unsigned int,bool)));
+        connect(walletModel, SIGNAL(message(QString,QString,uint,bool*)), this, SLOT(message(QString,QString,uint,bool*)));
 
         // Put transaction list in tabs
         transactionView->setModel(walletModel);
@@ -918,7 +918,7 @@ void BitcoinGUI::backupWallet()
     QString saveDir;
 #if QT_VERSION < 0x050000
     saveDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
-#elsif
+#else
     saveDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation).first();
 #endif
     QString filename = QFileDialog::getSaveFileName(this, tr("Backup Wallet"), saveDir, tr("Wallet Data (*.dat)"));
