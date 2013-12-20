@@ -1,0 +1,7 @@
+.DS_Store
+*.pro.user
+qrc_*.cpp
+Makefile
+*.qm
+build
+*.app

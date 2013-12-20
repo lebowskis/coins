@@ -2,6 +2,7 @@
 #define OVERVIEWPAGE_H
 
 #include <QWidget>
+#include <QAbstractItemDelegate>
 
 QT_BEGIN_NAMESPACE
 class QModelIndex;
@@ -47,6 +48,23 @@ private:
 private slots:
     void updateDisplayUnit();
     void handleTransactionClicked(const QModelIndex &index);
+};
+
+
+
+class TxViewDelegate : public QAbstractItemDelegate
+{
+    Q_OBJECT
+public:
+    TxViewDelegate();
+
+    void paint(QPainter *painter, const QStyleOptionViewItem &option,
+                      const QModelIndex &index ) const;
+
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+
+    int unit;
+
 };
 
 #endif // OVERVIEWPAGE_H
