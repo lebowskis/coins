@@ -52,6 +52,7 @@ protected:
     void closeEvent(QCloseEvent *event);
     void dragEnterEvent(QDragEnterEvent *event);
     void dropEvent(QDropEvent *event);
+    bool eventFilter(QObject *object, QEvent *event);
 
 private:
     ClientModel *clientModel;
@@ -106,6 +107,8 @@ private:
     void createToolBars();
     /** Create system tray (notification) icon */
     void createTrayIcon();
+    /** Create dock (mac notification) icon */
+    void createTrayIconMenu();
 
 public slots:
     /** Set number of connections shown in the UI */
@@ -119,7 +122,7 @@ public slots:
     void setEncryptionStatus(int status);
 
     /** Notify the user of an error in the network or transaction handling code. */
-    void error(const QString &title, const QString &message, bool modal);
+    void message(const QString &title, const QString &message, unsigned int style, bool *ret);
     /** Asks the user whether to pay the transaction fee or to cancel the transaction.
        It is currently not possible to pass a return value to another thread through
        BlockingQueuedConnection, so an indirected pointer is used.

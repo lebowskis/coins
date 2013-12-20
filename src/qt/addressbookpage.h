@@ -54,14 +54,14 @@ private:
     QString returnValue;
     QSortFilterProxyModel *proxyModel;
     QMenu *contextMenu;
-    QAction *deleteAction;
+    QAction *deleteAddress;
     QString newAddressToSelect;
 
 private slots:
-    void on_deleteButton_clicked();
-    void on_newAddressButton_clicked();
+    void on_deleteAddress_clicked();
+    void on_newAddress_clicked();
     /** Copy address of currently selected address entry to clipboard */
-    void on_copyToClipboard_clicked();
+    void on_copyAddress_clicked();
     void on_signMessage_clicked();
     void on_verifyMessage_clicked();
     void selectionChanged();
@@ -73,6 +73,8 @@ private slots:
     void onCopyLabelAction();
     /** Edit currently selected address entry */
     void onEditAction();
+    /** Send them coins **/
+    void onSendCoinsAction();
 
     /** New entry/entries were added to address table */
     void selectNewAddress(const QModelIndex &parent, int begin, int end);
@@ -80,6 +82,7 @@ private slots:
 signals:
     void signMessage(QString addr);
     void verifyMessage(QString addr);
+    void sendCoins(QString addr);
 };
 
 #endif // ADDRESSBOOKDIALOG_H
