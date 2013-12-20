@@ -188,7 +188,6 @@ HEADERS += src/qt/bitcoingui.h \
     src/leveldb.h \
     src/threadsafety.h \
     src/limitedmap.h \
-    src/qt/macnotificationhandler.h \
     src/qt/splashscreen.h
 
 SOURCES += src/qt/bitcoin.cpp \
@@ -332,19 +331,10 @@ isEmpty(BOOST_THREAD_LIB_SUFFIX) {
 # Paths are different depending on if macports or homebrew is used to build dependencies
 
 isEmpty(BDB_LIB_PATH) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    macx:BDB_LIB_PATH = /opt/local/lib/db48
-=======
 #macports
     #macx:BDB_LIB_PATH = /opt/local/lib/db48
 #homebrew
     macx:BDB_LIB_PATH = /usr/local/Cellar/berkeley-db4/4.8.30/lib/
->>>>>>> c39f702... Look, let me explain something to you. I'm not Mr. Lebowski. You're Mr. Lebowski. I'm the Dude.
-=======
-    #macx:BDB_LIB_PATH = /opt/local/lib/db48
-    macx:BDB_LIB_PATH = /usr/local/Cellar/berkeley-db4/4.8.30/lib/
->>>>>>> 066b3ec... This build with out networkhashps will not stand, man
 }
 
 isEmpty(BDB_LIB_SUFFIX) {
@@ -352,42 +342,21 @@ isEmpty(BDB_LIB_SUFFIX) {
 }
 
 isEmpty(BDB_INCLUDE_PATH) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    macx:BDB_INCLUDE_PATH = /opt/local/include/db48
-=======
-    #macx:BDB_INCLUDE_PATH = /opt/local/include/db48
-    macx:BDB_INCLUDE_PATH = /usr/local/Cellar/berkeley-db4/4.8.30/include/
->>>>>>> 066b3ec... This build with out networkhashps will not stand, man
-}
-
-isEmpty(BOOST_LIB_PATH) {
-    #macx:BOOST_LIB_PATH = /opt/local/lib
-    macx:BOOST_LIB_PATH = /usr/local/Cellar/boost/1.55.0/lib/
-}
-
-isEmpty(BOOST_INCLUDE_PATH) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    macx:BOOST_INCLUDE_PATH = /opt/local/include
-=======
-=======
-# macports
+#macports
     #macx:BDB_INCLUDE_PATH = /opt/local/include/db48
 #homebrew
     macx:BDB_INCLUDE_PATH = /usr/local/Cellar/berkeley-db4/4.8.30/include/
 }
 
 isEmpty(BOOST_LIB_PATH) {
-# macports
+#macports
     #macx:BOOST_LIB_PATH = /opt/local/lib
 #homebrew
     macx:BOOST_LIB_PATH = /usr/local/Cellar/boost/1.55.0/lib/
 }
 
 isEmpty(BOOST_INCLUDE_PATH) {
-# macports
->>>>>>> c39f702... Look, let me explain something to you. I'm not Mr. Lebowski. You're Mr. Lebowski. I'm the Dude.
+#macports
     #macx:BOOST_INCLUDE_PATH = /opt/local/include
 #homebrew
     macx:BOOST_INCLUDE_PATH = /usr/local/Cellar/boost/1.55.0/include/
@@ -395,24 +364,12 @@ isEmpty(BOOST_INCLUDE_PATH) {
 
 isEmpty(OPENSSL_INCLUDE_PATH) {
 # homebrew
-=======
-    #macx:BOOST_INCLUDE_PATH = /opt/local/include
-    macx:BOOST_LIB_PATH = /usr/local/Cellar/boost/1.55.0/include/
-}
-
-isEmpty(OPENSSL_INCLUDE_PATH) {
->>>>>>> 066b3ec... This build with out networkhashps will not stand, man
     macx:OPENSSL_INCLUDE_PATH = /usr/local/Cellar/openssl/1.0.1e/include/
 }
 
 isEmpty(OPENSSL_LIB_PATH) {
-<<<<<<< HEAD
 #homebrew
     macx:OPENSSL_LIB_PATH = /usr/local/Cellar/openssl/1.0.1e/lib/
->>>>>>> d8068b0... Qt5 compatibility
-=======
-    macx:OPENSSL_LIB_PATH = /usr/local/Cellar/openssl/1.0.1e/lib/
->>>>>>> 066b3ec... This build with out networkhashps will not stand, man
 }
 
 win32:DEFINES += WIN32
@@ -440,9 +397,6 @@ macx:LIBS += -framework Foundation -framework ApplicationServices -framework App
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/qt/res/icons/Lebowskis.icns
 macx:TARGET = "Lebowskis-Qt"
-macx:QMAKE_CFLAGS_THREAD += -pthread
-macx:QMAKE_LFLAGS_THREAD += -pthread
-macx:QMAKE_CXXFLAGS_THREAD += -pthread
 macx:QMAKE_INFO_PLIST = share/qt/Info.plist
 
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
